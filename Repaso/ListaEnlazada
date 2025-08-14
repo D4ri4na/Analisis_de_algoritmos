@@ -1,0 +1,94 @@
+
+public class Nodo<T>
+{
+    public T Dato;
+    public Nodo<T> Siguiente;
+
+    public Nodo(T dato)
+    {
+        Dato = dato;
+        Siguiente = null;
+    }
+}
+
+public class ListaEnlazada<T>
+{
+    private Nodo<T> cabeza;
+    public int Conteo { get; private set; }
+
+    public ListaEnlazada()
+    {
+        cabeza = null;
+        Conteo = 0;
+    }
+
+    public void InsertarFinal(T valor)
+    {
+        var nuevo = new Nodo<T>(valor);
+
+        if (cabeza == null)
+        {
+            cabeza = nuevo;
+        }
+        else
+        {
+            var actual = cabeza;
+            while (actual.Siguiente != null)
+            {
+                actual = actual.Siguiente;
+            }
+            actual.Siguiente = nuevo;
+        }
+
+        Conteo++;
+    }
+	
+	public void InsertarOrdenado(T valor)
+    {
+        var nuevo = new Nodo<T>(valor);
+		
+        if (cabeza == null || valor.CompareTo(cabeza.Dato) < 0)
+        {
+            nuevo.Siguiente = cabeza;
+            cabeza = nuevo;
+        }
+        else
+        {
+            var actual = cabeza;
+            while (actual.Siguiente != null && valor.CompareTo(actual.Siguiente.Dato) > 0)
+            {
+                actual = actual.Siguiente;
+            }
+
+            nuevo.Siguiente = actual.Siguiente;
+            actual.Siguiente = nuevo;
+        }
+
+        Conteo++;
+    }
+
+    public void Recorrer(Action<T> accion)
+    {
+        var actual = cabeza;
+        while (actual != null)
+        {
+            accion(actual.Dato);
+            actual = actual.Siguiente;
+        }
+    }
+}
+
+public class Program
+{
+    public static void Main()
+    {
+        ListaEnlazada<int> l = new ListaEnlazada<int>();
+        l.InsertarFinal(10);
+        l.InsertarFinal(20);
+        l.InsertarFinal(30);
+		l.InsertarFinal(40);
+		l.InsertarOrdenado(33);
+
+        l.Recorrer(dat => Console.WriteLine(dat));
+    }
+}
