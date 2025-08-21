@@ -1,0 +1,17 @@
+void Main()
+{
+	string fullPathfile = @"C:\Users\ucb\Downloads\prueba.txt";
+	try
+	{
+		using(StreamReader reader = new StreamReader(fullPathfile))
+		{
+			string line;
+			while((line = reader.ReadLine() != null)
+			{
+				Console.WriteLine(line);
+			}
+		}
+	}
+}
+
+// Define other methods and classes here
