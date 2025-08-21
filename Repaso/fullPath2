@@ -1,0 +1,13 @@
+void Main()
+{
+	string fullPathfile = @"C:\Users\ucb\Downloads\prueba.txt";
+	try
+	{
+		string[] lineas= File.ReadAllLines(fulPathFile);
+		lineas.Dump();
+		
+		string content = File.ReadAllText(fullPathFile);
+		content.Dump();
+	}
+}
+
