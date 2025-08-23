@@ -1,0 +1,15 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hola Mundo");
+        if (args.Length > 0)
+        {
+            string fullFilePath = args[0];
+            Console.WriteLine($"El archivo se llama: {fullFilePath}");
+        }
+    }
+}
