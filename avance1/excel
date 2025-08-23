@@ -1,0 +1,33 @@
+using System;
+using System.IO;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Hola Mundo");
+        if (args.Length > 0)
+        {
+            string fullFilePath = args[0];
+            Console.WriteLine($"El archivo se llama: {fullFilePath}");
+            string[] lines = File.ReadAllLines(fullFilePath);
+            int i = 0, sum = 0;
+            foreach (var l in lines)
+            {
+                if (i++ == 0)
+                {
+                    Console.WriteLine(l + " ->Encabezado");
+                }
+                else
+                {
+                    Console.WriteLine(l);
+                    string[] parts = l.Split(';');
+                    int monto = int.Parse(parts[2]);
+                    sum = sum + monto;
+                }
+            }
+            Console.WriteLine(sum);
+            
+        }
+    }
+}
