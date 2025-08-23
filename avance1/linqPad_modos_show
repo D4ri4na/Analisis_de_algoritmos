@@ -1,0 +1,8 @@
+List<int> l = new List<int>(){2,3,4,5};
+l.Dump();
+
+string s= string.Join(", ",l);
+s.Dump();
+
+string s2 = string.Join("el horroroso pepep", 1);
+s2.Dump();
