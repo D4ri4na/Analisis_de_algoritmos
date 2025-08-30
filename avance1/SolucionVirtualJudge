@@ -1,0 +1,58 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+// Ejemplo para ser probado en CodeMirror (con entrada desde teclado).
+class Program
+{
+    static void Main(string[] args)
+    {
+        string line;
+        while (!string.IsNullOrEmpty(line = Console.ReadLine()))
+        {
+			int[] intArray = line.Split(',').Select(x=> int.Parse(x)).ToArray();
+        	List<int[]> permutations = new List<int[]>();
+	        permutations = GeneratePermutations(intArray, 0, intArray.Length - 1, permutations);
+
+			//bool first = true;
+	        // Imprimir las permutaciones
+	        foreach (int[] permutation in permutations)
+	        {
+	            //Console.WriteLine(string.Join(", ", permutation));
+				
+				// Escribe la nueva línea, incluyendo el salto de línea.
+			    Console.WriteLine(string.Join(",", permutation));
+	        }
+        
+        }
+    }
+  
+  	static List<int[]> GeneratePermutations(int[] arr, int l, int r, List<int[]> permutationsList)
+    {
+        if (l == r)
+        {
+            int[] permutation = new int[arr.Length];
+            Array.Copy(arr, 0, permutation, 0, arr.Length);
+            permutationsList.Add(permutation);
+            return permutationsList;
+        }
+
+        for (int i = l; i <= r; i++)
+        {
+            Swap(arr, l, i);
+            permutationsList = GeneratePermutations(arr, l + 1, r, permutationsList);
+            Swap(arr, l, i); // backtrack
+        }
+
+        return permutationsList;
+    }
+
+    static void Swap(int[] arr, int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+	
+}
+	
